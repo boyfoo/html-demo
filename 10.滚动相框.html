@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .navigation {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      gap: 30px
+    }
+
+    .navigation li {
+      position: relative;
+      list-style: none;
+    }
+
+    .navigation li a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+      background: #fff;
+      color: #333;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      font-size: 1.5em;
+      text-decoration: none;
+    }
+
+    .navigation li.active a {
+      background: #f00;
+      color: #fff;
+    }
+
+    .navigation li a:hover {
+      color: red;
+    }
+
+    .imgScroll {
+      position: absolute;
+      left: 0;
+      padding: 60px 0;
+      width: 100%;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    .imgScroll div {
+      display: flex;
+      animation: animate 40s linear infinite;
+      animation-delay: -40s;
+    }
+    .imgScroll div:nth-child(2) {
+      animation: animate2 40s linear infinite;
+      animation-delay: -20s;
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    @keyframes animate2 {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-200%);
+      }
+    }
+    .imgScroll:hover div,.imgScroll:hover div:nth-child(2){
+      animation-play-state: paused;
+    }
+
+    .imgScroll div img {
+      margin: 0 25px;
+      width: 300px;
+      height: 300px;
+      border: 10px solid transparent;
+      transition: 0.25s;
+      object-fit: cover;
+    }
+
+    .imgScroll div img:hover {
+      border: 10px solid #fff;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .imgScroll:hover div img {
+      opacity: 0.05;
+      filter: blur(5px);
+    }
+    .imgScroll div img:hover {
+      opacity: 1;
+      filter: blur(0px);
+    }
+
+
+
+  </style>
+</head>
+<body>
+<div class="imgScroll">
+  <div>
+    <img src="./public/images/zjl.png" alt="">
+    <img src="./public/images/zjl2.png" alt="">
+    <img src="./public/images/zjl3.png" alt="">
+    <img src="./public/images/zjl4.png" alt="">
+    <img src="./public/images/zjl5.png" alt="">
+    <img src="./public/images/zjl6.png" alt="">
+  </div>
+  <div>
+    <img src="./public/images/zjl.png" alt="">
+    <img src="./public/images/zjl2.png" alt="">
+    <img src="./public/images/zjl3.png" alt="">
+    <img src="./public/images/zjl4.png" alt="">
+    <img src="./public/images/zjl5.png" alt="">
+    <img src="./public/images/zjl6.png" alt="">
+  </div>
+</div>
+<ul class="navigation">
+  <li class="active"><a href="#"><i class="fa-solid fa-house"></i></a></li>
+  <li><a href="#"><i class="fa-solid fa-fire"></i></a></li>
+  <li><a href="#"><i class="fa-solid fa-gamepad"></i></a></li>
+  <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+</ul>
+</body>
+</html>
