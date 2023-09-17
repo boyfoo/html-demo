@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #F5F5F5;
+    }
+
+    h3 {
+      font-size: 1.75em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .box {
+      position: relative;
+    }
+
+    /*移入全部模糊了*/
+    .box:hover .list {
+      filter: blur(5px);
+      opacity: 0.25;
+    }
+
+    .box .list {
+      position: relative;
+      display: flex;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.5s;
+      /*隐藏排名，一开始排名是在外面的看不见，鼠标移入的时候才显示出来*/
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .box .list:hover {
+      /*就我不模糊*/
+      filter: blur(0px);
+      opacity: 1;
+      /*移入的阴影*/
+      box-shadow: -10px 20px 35px rgba(0, 0, 0, 0.15);
+      /*移入放大*/
+      transform: scale(1.1);
+    }
+
+
+    .box .list .imgBx {
+      position: relative;
+      height: 60px;
+      width: 60px;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 10px;
+    }
+
+    .box .list .imgBx img {
+      position: absolute;
+      inset: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+
+    .box .list .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: #333;
+    }
+
+    .box .list .content .rank {
+      position: absolute;
+      right: -50px;
+      color: #03a9f4;
+      transition: 0.5s;
+      font-size: 2em;
+    }
+
+    .box .list .content .rank small {
+      font-weight: 500;
+      opacity: 0.25;
+    }
+
+    .box .list:hover .content .rank {
+      right: 20px;
+    }
+
+    .box .list .content h4 {
+      line-height: 1.2em;
+      font-weight: 600;
+    }
+
+    .box .list .content p {
+      font-size: 0.75em;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h3>Popular Creator Rank List</h3>
+  <div class="box">
+    <div class="list">
+      <div class="imgBx">
+        <img src="./public/images/zjl.png" alt="">
+      </div>
+      <div class="content">
+        <h2 class="rank">
+          <small>#</small>
+          1
+        </h2>
+        <h4>Fantasy</h4>
+        <p>Chinese singer</p>
+      </div>
+    </div>
+    <div class="list">
+      <div class="imgBx">
+        <img src="./public/images/zjl2.png" alt="">
+      </div>
+      <div class="content">
+        <h2 class="rank">
+          <small>#</small>
+          2
+        </h2>
+        <h4>Eunuch's Migraine</h4>
+        <p>Chinese singer</p>
+      </div>
+    </div>
+    <div class="list">
+      <div class="imgBx">
+        <img src="./public/images/zjl3.png" alt="">
+      </div>
+      <div class="content">
+        <h2 class="rank">
+          <small>#</small>
+          3
+        </h2>
+        <h4>Handwritten</h4>
+        <p>Chinese singer</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
