@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      padding: 100px;
+      background: #fff;
+      transition: 0.5s;
+    }
+
+    .banner.night {
+      background: #333;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      color: #333;
+      font-size: 2em;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.5s;
+    }
+
+    header .logo span {
+      color: #2196f3;
+    }
+
+    header ul {
+      display: flex;
+      /*元素间隔*/
+      gap: 40px;
+    }
+
+    header ul li {
+      list-style: none;
+    }
+
+    header ul li a {
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1.2em;
+      color: #333;
+      transition: 0.5s;
+    }
+
+    .content {
+      position: relative;
+      max-width: 700px;
+      z-index: 10;
+    }
+
+    .content h3 {
+      font-size: 2em;
+      color: #333;
+      font-weight: 200;
+      transition: 0.5s;
+    }
+
+    .content h2 {
+      font-size: 5.5em;
+      color: #333;
+      font-weight: 700;
+      transition: 0.5s;
+    }
+
+    .content h2 span {
+      color: #e91e63;
+    }
+
+    .content p {
+      font-size: 1.2em;
+      color: #666;
+      margin: 10px 0;
+      transition: 0.5s;
+    }
+
+    .content button {
+      position: relative;
+      background: #2196f3;
+      color: #fff;
+      border: none;
+      outline: none;
+      padding: 15px 35px;
+      font-size: 1.2em;
+      letter-spacing: 0.05em;
+      margin-right: 20px;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.5s;
+
+    }
+
+    .content button.chat {
+      background: transparent;
+      color: #333;
+    }
+
+    .content button.chat ion-icon {
+      position: relative;
+      color: #e91e63;
+      top: 5px;
+      font-size: 1.5em;
+    }
+
+    .sci {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .sci li {
+      list-style: none;
+    }
+
+    .sci li a {
+      text-decoration: none;
+      font-size: 1.75em;
+      color: #333;
+    }
+
+    .sci li a:hover {
+      color: #2196f3;
+    }
+
+    .banner.night .dayNight {
+      background: #444;
+      color: #fff;
+    }
+
+    .dayNight {
+      position: absolute;
+      left: 50%;
+      bottom: 25px;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: #f0f0f0;
+      border-radius: 50%;
+      color: #666;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.5s;
+      font-size: 2em;
+    }
+
+    .dayNight ion-icon:nth-child(2), .banner.night .dayNight ion-icon:nth-child(1) {
+      display: none;
+    }
+
+    .banner.night .dayNight ion-icon:nth-child(2) {
+      display: block;
+    }
+
+    .banner.night header .logo,
+    .banner.night .content h2,
+    .banner.night .content p,
+    .banner.night .content button .chat,
+    .banner.night .sci li a,
+    .banner.night header ul li a {
+      color: #fff;
+    }
+
+    .banner.night .sci li a:hover {
+      color: #2196f3;
+    }
+
+    .colors {
+      position: absolute;
+      right: 0;
+      margin-top: 60px;
+      max-width: 740px;
+      animation: animateColor 8s ease-in-out infinite;
+    }
+
+    @keyframes animateColor {
+      0%,100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(30px);
+      }
+    }
+
+    .men {
+      position: absolute;
+      right: 200px;
+      max-height: 80vh;
+      bottom: 0;
+      animation: animateMen 8s ease-in-out infinite;
+    }
+
+    @keyframes animateMen {
+      0%,100% {
+        transform: translateX(0px);
+      }
+      50% {
+
+        transform: translateX(-30px);
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+<section class="banner">
+  <header>
+    <a href="#" class="logo">
+      <span>My</span>
+      Portfolio
+    </a>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Work</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </header>
+  <div class="content">
+    <h3>Hey_</h3>
+    <h2>I am <span id="text">Join</span></h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, aut qui? Sit at tempore modi harum nisi assumenda
+      nostrum quam.
+    </p>
+    <button>Hire Me</button>
+    <button class="chat">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+      Let's Chat
+    </button>
+
+  </div>
+  <img src="./public/images/5c750aea7ca27.png" alt="" class="colors">
+  <img src="./public/images/人物 (9).png" alt="" class="men">
+  <ul class="sci">
+    <li><a href="#">
+      <ion-icon name="logo-facebook"></ion-icon>
+    </a></li>
+    <li><a href="#">
+      <ion-icon name="logo-linkedin"></ion-icon>
+    </a></li>
+    <li><a href="#">
+      <ion-icon name="logo-skype"></ion-icon>
+    </a></li>
+    <li><a href="#">
+      <ion-icon name="logo-instagram"></ion-icon>
+    </a></li>
+  </ul>
+  <div class="dayNight">
+    <ion-icon name="moon-outline"></ion-icon>
+    <ion-icon name="sunny-outline"></ion-icon>
+  </div>
+</section>
+<!--https://ionic.io/ionicons选择图标-->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script>
+    let banner = document.querySelector('.banner');
+    let dayNight = document.querySelector('.dayNight');
+    dayNight.onclick = function () {
+        banner.classList.toggle('night');
+    }
+</script>
+</body>
+</html>
