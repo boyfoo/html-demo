@@ -5,12 +5,285 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #ddd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .player-warp {
+      position: relative;
+    }
+
+    .player-control {
+      display: flex;
+      width: 360px;
+      height: 80px;
+      padding: 20px 30px;
+      background-color: #fff;
+      border-radius: 15px;
+      z-index: 10;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .player-control .cover {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      padding: 6px;
+      background-color: #fff;
+      margin-top: -30px;
+      animation: zhuan 5s infinite linear;
+      animation-play-state: running;
+    }
+
+    .player-control .cover::before {
+      width: 8px;
+      height: 8px;
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background-color: #fff;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .player-control .cover img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .player-control .control {
+      flex: 1;
+      display: flex;
+      justify-content: right;
+      gap: 16px;
+    }
+
+    .control i {
+      /* 设置了宽高更好点击 */
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      transition: all 0.3s;
+      color: #b3b0b0;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    .control i:hover {
+      background-color: rgba(71, 70, 70, 0.2);
+      color: #fff;
+      border-radius: 8px;
+    }
+
+
+    @keyframes zhuan {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .player-info {
+      width: 90%;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px;
+      z-index: -1;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      display: flex;
+      justify-content: flex-end;
+      /* opacity: 0; */
+      top: -100%;
+    }
+
+    .player-info .info {
+      width: 60%;
+      font-size: 12px;
+    }
+
+    .info .name {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .info .singer-album {
+      color: #757474;
+      line-height: 20px;
+    }
+
+    .info .music_progress {
+      width: 100%;
+    }
+
+    .music_progress .music_progress_top {
+      display: flex;
+      justify-content: space-between;
+      color: #f2709b;
+      line-height: 20px;
+    }
+
+    .music_progress_bar {
+      width: 100%;
+      height: 3px;
+      background-color: #cccaca;
+      border-radius: 10px;
+      margin-top: 2px;
+      overflow: hidden;
+    }
+
+    .music_progress_line {
+      height: 100%;
+      width: 20%;
+      background-color: #f2709b;
+    }
+
+    .mask_bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      background: url("http://p1.music.126.net/FCWD6ibS2JK2B3QAnXuzwQ==/109951167805892385.jpg?param=300x300") no-repeat center center;
+      background-size: cover;
+      filter: blur(40px);
+      transition: all 1s;
+    }
+
+    .modal {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* display: none; */
+    }
+
+    .modal-box {
+      width: 30%;
+      height: 100%;
+      padding: 20px;
+      background: #fff;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .modal-box-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 40px;
+    }
+
+    .modal-close {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal-wrapper {
+      width: 100%;
+      height: calc(100% - 40px);
+      overflow-y: auto;
+    }
+
+    .music-list {
+      list-style: none;
+    }
+
+    .music-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgb(186, 182, 182);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="player-warp"></div>
+  <div class="player-warp">
+    <div class="player-info">
+      <class class="info">
+        <div class="name">我记得</div>
+        <div class="singer-album">赵雷 - 署前街少年</div>
+        <div class="music_progress">
+          <div class="music_progress_top">
+            <span class="current-time">00:00</span>
+            <span class="time">05:29</span>
+          </div>
+          <div class="music_progress_bar">
+            <div class="music_progress_line"></div>
+          </div>
+        </div>
+      </class>
+    </div>
+    <div class="player-control">
+      <!-- 唱片封面 -->
+
+      <!-- http://music.163.com/song/media/outer/url?id=1974443814.mp3 -->
+      <div class="cover">
+        <img src="http://p1.music.126.net/FCWD6ibS2JK2B3QAnXuzwQ==/109951167805892385.jpg?param=300x300" alt="封面">
+      </div>
+      <!-- 按钮 -->
+      <div class="control">
+        <i class="fa fa-step-backward"></i>
+        <i class="fa fa-play"></i>
+        <!-- <i class="fa fa-stop"></i> -->
+        <i class="fa fa-step-forward"></i>
+        <i class="fa fa-reorder"></i>
+      </div>
+    </div>
+  </div>
   <div class="mask_bg"></div>
-  <audio src=""></audio>
+  <div class="modal">
+    <div class="modal-box">
+      <div class="modal-box-top">
+        <div class="modal-title">音乐列表</div>
+        <div class="modal-close">
+          <i class="fa fa-close"></i>
+        </div>
+      </div>
+      <div class="modal-wrapper">
+        <ul class="music-list">
+          <li>
+            <span>02. 我记得 - 赵雷</span>
+            <span class="fa fa-play-circle"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
