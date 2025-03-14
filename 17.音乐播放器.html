@@ -47,7 +47,7 @@
       background-color: #fff;
       margin-top: -30px;
       animation: zhuan 5s infinite linear;
-      animation-play-state: running;
+      animation-play-state: paused;
     }
 
     .player-control .cover::before {
@@ -121,8 +121,9 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
       display: flex;
       justify-content: flex-end;
-      /* opacity: 0; */
-      top: -100%;
+      opacity: 0;
+      /* top: -100%; */
+      top: -6px;
     }
 
     .player-info .info {
@@ -162,7 +163,7 @@
 
     .music_progress_line {
       height: 100%;
-      width: 20%;
+      width: 0%;
       background-color: #f2709b;
     }
 
@@ -186,7 +187,7 @@
       top: 0;
       left: 0;
       background-color: rgba(0, 0, 0, 0.5);
-      /* display: none; */
+      display: none;
     }
 
     .modal-box {
@@ -235,12 +236,12 @@
   <div class="player-warp">
     <div class="player-info">
       <class class="info">
-        <div class="name">我记得</div>
-        <div class="singer-album">赵雷 - 署前街少年</div>
+        <div class="name">---</div>
+        <div class="singer-album">---</div>
         <div class="music_progress">
           <div class="music_progress_top">
             <span class="current-time">00:00</span>
-            <span class="time">05:29</span>
+            <span class="time">---</span>
           </div>
           <div class="music_progress_bar">
             <div class="music_progress_line"></div>
@@ -253,12 +254,12 @@
 
       <!-- http://music.163.com/song/media/outer/url?id=1974443814.mp3 -->
       <div class="cover">
-        <img src="http://p1.music.126.net/FCWD6ibS2JK2B3QAnXuzwQ==/109951167805892385.jpg?param=300x300" alt="封面">
+        <img src="">
       </div>
       <!-- 按钮 -->
       <div class="control">
         <i class="fa fa-step-backward"></i>
-        <i class="fa fa-play"></i>
+        <i id="playBtn" class="fa fa-play"></i>
         <!-- <i class="fa fa-stop"></i> -->
         <i class="fa fa-step-forward"></i>
         <i class="fa fa-reorder"></i>
@@ -284,6 +285,101 @@
       </div>
     </div>
   </div>
+
+  <audio src=""></audio>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    const musicList = [
+      {
+        "name": "我记得",
+        "audio_url": "http://music.163.com/song/media/outer/url?id=1974443814.mp3",
+        "singer": "赵雷",
+        "album": "署前街少年",
+        "cover": "http://p2.music.126.net/FCWD6ibS2JK2B3QAnXuzwQ==/109951167805892385.jpg",
+        "time": "05:29"
+      },
+      {
+        "name": "成都",
+        "audio_url": "./audios/成都.mp3",
+        "singer": "赵雷",
+        "album": "成都",
+        "cover": "http://p2.music.126.net/34YW1QtKxJ_3YnX9ZzKhzw==/2946691234868155.jpg",
+        "time": "05:28"
+      },
+      {
+        "name": "南方姑娘",
+        "audio_url": "./audios/南方姑娘.mp3",
+        "singer": "赵雷",
+        "album": "赵小雷",
+        "cover": "http://p2.music.126.net/wldFtES1Cjnbqr5bjlqQbg==/18876415625841069.jpg",
+        "time": "05:32"
+      },
+      {
+        "name": "阴天快乐",
+        "audio_url": "./audios/阴天快乐.mp3",
+        "singer": "陈奕迅",
+        "album": "Rice & Shine",
+        "cover": "http://p2.music.126.net/itkdsMFR8nYzaTiDdHO3tA==/109951165995320408.jpg",
+        "time": "04:20"
+      },
+      {
+        "name": "爱情转移",
+        "audio_url": "./audios/爱情转移.mp3",
+        "singer": "陈奕迅",
+        "album": "认了吧",
+        "cover": "http://p2.music.126.net/o_OjL_NZNoeog9fIjBXAyw==/18782957139233959.jpg",
+        "time": "04:20"
+      }
+    ]
+    var currentIndex = 0
+
+    // 根据信息设置对应标签的内容
+    function render(data) {
+      $(".name").text(data.name)
+      $(".singer-album").text(`${data.singer} - ${data.album}`)
+      $(".time").text(data.time)
+      $(".cover img").attr("src", data.cover)
+      $("audio").attr("src", data.audio_url)
+    }
+
+    // 绑定事件
+    function bindEvent() {
+      $("#playBtn").on("click", function () {
+        if ($(this).hasClass("fa-play")) {
+          $(this).removeClass("fa-play").addClass("fa-pause")
+          $(".player-info").css("opacity", 1)
+          $(".player-info").animate({ opacity: 1, top: "-100%" }, 200)
+          $("audio").get(0).play()
+          $(".cover").css("animation-play-state", "running")
+        } else {
+          $(this).removeClass("fa-pause").addClass("fa-play")
+          $(".player-info").animate({ top: "-6px", opacity: 0 }, 200)
+          $("audio").get(0).pause()
+          $(".cover").css("animation-play-state", "paused")
+        }
+      })
+      $("audio").on("timeupdate", function (e) {
+        var time = formatTime(e.currentTarget.currentTime);
+        $(".current-time").text(time)
+
+        var value = e.currentTarget.currentTime / e.currentTarget.duration * 100
+        $(".music_progress_line").css("width", value + "%")
+      })
+    }
+
+    function formatTime(time) {
+      var min = parseInt(time / 60);
+      var sec = parseInt(time % 60);
+      min = min < 10 ? "0" + min : min
+      sec = sec < 10 ? "0" + sec : sec
+      return `${min}:${sec}`
+    }
+
+
+    bindEvent()
+    render(musicList[currentIndex])
+
+  </script>
 </body>
 
 </html>
